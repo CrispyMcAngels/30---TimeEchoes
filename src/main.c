@@ -143,7 +143,7 @@ void quest_gui_handler(){
 			break;
 		case 5: //Input control NOTE: L and R ARE INVERTED IN POKEAGB
 			if (!pal_fade_control.active) { //Wait for fadescreen to end
-                switch (super.buttons_new_remapped & (KEY_B | KEY_LEFT | KEY_RIGHT | KEY_L | KEY_R | KEY_SELECT)) {
+                switch (super.buttons_new_remapped & (KEY_A | KEY_B | KEY_LEFT | KEY_RIGHT | KEY_L | KEY_R | KEY_SELECT)) {
 					case KEY_SELECT:
 						if(quest_gui_info->mode == QUEST_GUI_ACTIVE){
 							gpu_pal_apply_compressed((void *)gui_completedPal, 0, 32);
@@ -178,6 +178,14 @@ void quest_gui_handler(){
                         set_callback1(quest_gui_exit);
                         super.multi_purpose_state_tracker = 0;
                         return;
+                    case KEY_A: {
+                        struct QuestTableEntry *selected = quest_gui_info->page_quests[quest_gui_info->cursor_i];
+                        if (selected != &empty_quest) {
+                            u16 quest_id = (u16)(selected - quest_list) + 1;
+                            var_set(0x4067, quest_id);
+                        }
+                        break;
+                    }
                     case KEY_RIGHT:
 					quest_gui_info->cursor_i = quest_gui_info->cursor_i == GUI_ENTRIES_PER_PAGE-1 ? 0 : quest_gui_info->cursor_i+1;
 					audio_play(SOUND_GENERIC_CLINK);
