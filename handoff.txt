@@ -1,0 +1,28 @@
+TimeEchoes handoff note
+
+Current UI layout changes:
+- NPC sprites use horizontal positions:
+  - (19, 62)
+  - (75, 62)
+  - (131, 62)
+  - (187, 62)
+- The quest title textbox has been reduced to a single box above the description box.
+- The title textbox origin is now at tile coordinates (3, 12).
+- The description box remains at tile coordinates (2, 15).
+
+Behavior notes:
+- The selected quest title is shown in the single title box.
+- The description updates from the currently selected cursor row.
+- Cursor movement is still driven by cursor_i and cursor_positions[].
+
+Files modified in this session:
+- src/main.c
+- src/include/gui.c
+- src/include/rbox_handler.c
+
+Notes for the next machine:
+- Copy the whole project folder to the other laptop.
+- Open the copied folder in VS Code on the other machine.
+- The project should be compiled there with the local GBA toolchain / armips setup.
+- VS Code chat history is not guaranteed to transfer with the project folder itself.
+- If you want the chat context, rely on this handoff note or copy the relevant details into a new chat.
