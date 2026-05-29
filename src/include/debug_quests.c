@@ -38,28 +38,32 @@ u8 bambinoSperduto2[] = {0xBB, 0xDD, 0xE9, 0xE8, 0xD5, 0x00, 0xE0, 0xD5, 0x00, 0
 
 struct QuestTableEntry debugQuestsConcrete[] = {
 	{
-		.oam_id = 43,
+		.tile_ptr = (void*)0x08D2FBD4,
+		.pal_ptr = (void*)0x08D2FE78,
 		.quest_name_ptr = &trovaLamo,
 		.quest_desc_ptr = &trovaLamo2,
 		.flag_is_available = 0x11,
 		.flag_is_completed = 0x12
 	},
 	{
-		.oam_id = 24,
+		.tile_ptr = (void*)0x08D305AC,
+		.pal_ptr = (void*)0x08D308E8,
 		.quest_name_ptr = &consegnaLaTorta,
 		.quest_desc_ptr = &consegnaLaTorta2,
 		.flag_is_available = 0x11,
 		.flag_is_completed = 0x12
 	},
 	{
-		.oam_id = 61,
+		.tile_ptr = (void*)0x08D310AC,
+		.pal_ptr = (void*)0x08D315EC,
 		.quest_name_ptr = &shh,
 		.quest_desc_ptr = &shh2,
 		.flag_is_available = 0x11,
 		.flag_is_completed = 0x12
 	},
 	{
-		.oam_id = 111,
+		.tile_ptr = (void*)0x0871A300,
+		.pal_ptr = (void*)0x08D321C4,
 		.quest_name_ptr = &helix,
 		.quest_desc_ptr = &helix2,
 		.flag_is_available = 0x11,
@@ -71,7 +75,8 @@ struct QuestTableEntry debugQuestsConcrete[] = {
 	
 	
 	{
-		.oam_id = 20,
+		.tile_ptr = NULL,
+		.pal_ptr = NULL,
 		.quest_name_ptr = &nulla,
 		.quest_desc_ptr = &nulla2,
 		.flag_is_available = 0x11,
@@ -83,14 +88,16 @@ struct QuestTableEntry debugQuestsConcrete[] = {
 	
 	
 	{
-		.oam_id = 26,
+		.tile_ptr = NULL,
+		.pal_ptr = NULL,
 		.quest_name_ptr = &paco,
 		.quest_desc_ptr = &paco2,
 		.flag_is_available = 0x11,
 		.flag_is_completed = 0x11
 	},
 	{
-		.oam_id = 10,
+		.tile_ptr = NULL,
+		.pal_ptr = NULL,
 		.quest_name_ptr = &bambinoSperduto,
 		.quest_desc_ptr = &bambinoSperduto2,
 		.flag_is_available = 0x960,
@@ -99,21 +106,23 @@ struct QuestTableEntry debugQuestsConcrete[] = {
 	
 	
 	{
-		.oam_id = 0,
+		.tile_ptr = NULL,
+		.pal_ptr = NULL,
 		.quest_name_ptr = &test1Title,
 		.quest_desc_ptr = &test1Desc,
 		.flag_is_available = 0x33C,
 		.flag_is_completed = 0x334
 	},
 	{
-		.oam_id = 0,
+		.tile_ptr = NULL,
+		.pal_ptr = NULL,
 		.quest_name_ptr = &test2Title,
 		.quest_desc_ptr = &test2Desc,
 		.flag_is_available = 0x33C,
 		.flag_is_completed = 0x334
 	},
 	{
-		.oam_id = 0xFF
+		.quest_name_ptr = NULL
 	}
 };
 

@@ -1,6 +1,6 @@
 [General]
 ApplicationVersion = '''0.5.6'''
-FreeSpaceSearch = '''000200'''
+FreeSpaceSearch = '''71AD00'''
 FreeSpaceBuffer = '''040'''
 NextExportID = '''0'''
 ShowRawIVByteForTrainer = False
@@ -3259,10 +3259,22 @@ Format = '''[palette<`ucp4`>]playerMugshots'''
 DefaultHash = '''7A0E7181'''
 
 [[NamedAnchors]]
-Name = '''data.sidequests'''
-Address = 0x812090
-Format = '''[title<""> description<""> startingFlag:|h endingFlag:|h Ow.|h filler filler filler]50'''
-DefaultHash = '''8C5D1E55'''
+Name = '''graphics.timeechoes.palette'''
+Address = 0x71AC80
+Format = '''`lzp4`'''
+DefaultHash = '''B8A62814'''
+
+[[NamedAnchors]]
+Name = '''graphics.timeechoes.tilemap.301A81'''
+Address = 0x811A30
+Format = '''`lzm4x32x20|graphics.timeechoes.tileset`'''
+DefaultHash = '''266431B6'''
+
+[[NamedAnchors]]
+Name = '''graphics.timeechoes.tileset'''
+Address = 0x71AD00
+Format = '''`lzs4x8x8`'''
+DefaultHash = '''78CB8C26'''
 
 #################################
 #################################
@@ -7050,7 +7062,7 @@ Destination = '''data.items.stats'''
 [[GotoShortcut]]
 Name = '''Maps'''
 Image = '''data.maps.banks/3/maps/0/map/0/layout/0/blockmap/'''
-Destination = '''maps.bank3.pallet town.3-0'''
+Destination = '''maps.bank3.PALLET TOWN.3-0'''
 
 #################################
 [[TableGroup]]

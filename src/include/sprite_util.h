@@ -19,6 +19,6 @@ extern u8 display_compressed_sprite(u8 sprite_w, u8 sprite_h, u8 sprite_x, u8 sp
 								u16 pals_tag,  void *ptr_to_pal,
 								u8 filp_h, u8 flip_v);
 
-extern u8 display_npc(u8 oam_id, u8 sprite_x, u8 sprite_y, u8 tiles_tag);
+extern u8 display_sprite_from_offset(void *tile_ptr, void *pal_ptr, u8 sprite_x, u8 sprite_y, u8 tiles_tag, u8 pals_tag);
 
 #endif

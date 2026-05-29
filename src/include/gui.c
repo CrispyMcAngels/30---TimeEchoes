@@ -71,8 +71,8 @@ struct TextboxTemplate quest_boxes_base[] = {
     {
 		/* title */
         .bg_id = 0,
-		.x = 3,
-		.y = 12,
+		.x = 2, //3
+		.y = 13, //12
         .width = 20,
         .height = 2,
         .pal_id = 15,

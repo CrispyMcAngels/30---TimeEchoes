@@ -4,7 +4,8 @@
 #include "quest_table.h"
 
 struct QuestTableEntry empty_quest = {
-	.oam_id = 0xFF,
+	.tile_ptr = NULL,
+	.pal_ptr = NULL,
 	.quest_name_ptr = &no_info,
 	.quest_desc_ptr = &no_info
 };
@@ -40,7 +41,7 @@ u8 findNextActiveAvailableQuests(struct QuestGuiInfo * const quest_gui_info){
 
 	u8 page_quests_i=0;
 
-	while (quest_iterator->oam_id != 0xFF && page_quests_i < GUI_ENTRIES_PER_PAGE){
+	while (quest_iterator->quest_name_ptr != NULL && page_quests_i < GUI_ENTRIES_PER_PAGE){
 		if(check_flag(quest_iterator->flag_is_available)){ //if it's available
 			if(!check_flag(quest_iterator->flag_is_completed)){ //if it's not completed
 				if(page_quests_i == 0){	
@@ -106,7 +107,7 @@ u8 findNextCompletedAvailableQuests(struct QuestGuiInfo * const quest_gui_info){
 
 	u8 page_quests_i=0;
 
-	while (quest_iterator->oam_id != 0xFF && page_quests_i < GUI_ENTRIES_PER_PAGE){
+	while (quest_iterator->quest_name_ptr != NULL && page_quests_i < GUI_ENTRIES_PER_PAGE){
 		if(check_flag(quest_iterator->flag_is_completed)){ //if it's completed
 			if(page_quests_i == 0){	
 				initGuiQuests(quest_gui_info); //Initialize quest list only when we know the next page will contain at least 1 quest, otherwise we should not allow page turning

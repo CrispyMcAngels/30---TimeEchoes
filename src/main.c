@@ -109,23 +109,29 @@ void quest_gui_handler(){
 					rboxid_clear_pixels(i, 0);
 				}
 				//write selected quest title
-				write_to_quest_title(0, 0, &dnav_text_black, 0, quest_gui_info->page_quests[quest_gui_info->cursor_i]->quest_name_ptr);
-				write_to_quest_desc (0, &dnav_text_black, 0, quest_gui_info->page_quests[0]->quest_desc_ptr);
+					write_to_quest_title(0, 0, &dnav_text_white, 0, quest_gui_info->page_quests[quest_gui_info->cursor_i]->quest_name_ptr);
 				
 				super.multi_purpose_state_tracker++;
 			}
 		case 3: {//Display OWs (cursor and npcs)
-			//Display cursor
-			u8 cursor_oam_id = display_compressed_sprite(16, 16, cursor_positions[0][0], cursor_positions[0][1], CURSOR_TILES_TAG, (void *)CURSOR_TILE_ADDR, CURSOR_PALS_TAG, (void *)0x08463308, 1, 0);	
+			//Display cursor with white palette
+			static const u16 white_cursor_pal[16] = {
+				0x0000, 0x7FFF, 0x7FFF, 0x7FFF,
+				0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF,
+				0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF,
+				0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF
+			};
+			u8 cursor_oam_id = display_compressed_sprite(16, 16, cursor_positions[0][0], cursor_positions[0][1], CURSOR_TILES_TAG, (void *)CURSOR_TILE_ADDR, CURSOR_PALS_TAG, (void *)white_cursor_pal, 1, 0);
 			quest_gui_info->cursor_oam_id = cursor_oam_id;
-			//Display all the needed NPCs
-			for(u8 i=0;
-					i<GUI_ENTRIES_PER_PAGE && quest_gui_info->page_quests[i]->oam_id != 0xFF;
-					i++){
-					
-				u8 npc_oam_id = display_npc(quest_gui_info->page_quests[i]->oam_id, npc_positions[i][0], npc_positions[i][1], i);
-				quest_gui_info->npc_oam_ids[i] = npc_oam_id;
-				
+			//Display all the needed sprites
+			for(u8 i=0; i<GUI_ENTRIES_PER_PAGE; i++){
+				if(quest_gui_info->page_quests[i]->tile_ptr != NULL && quest_gui_info->page_quests[i]->pal_ptr != NULL){
+					u8 spr_oam_id = display_sprite_from_offset(
+						quest_gui_info->page_quests[i]->tile_ptr,
+						quest_gui_info->page_quests[i]->pal_ptr,
+						npc_positions[i][0], npc_positions[i][1], i, i+4);
+					quest_gui_info->npc_oam_ids[i] = spr_oam_id;
+				}
 			}
 			super.multi_purpose_state_tracker++;
 		}
@@ -181,7 +187,7 @@ void quest_gui_handler(){
 						audio_play(SOUND_GENERIC_CLINK);	
                         break;
                 };
-					write_to_quest_title(0, 0, &dnav_text_black, 0, quest_gui_info->page_quests[quest_gui_info->cursor_i]->quest_name_ptr);
+					write_to_quest_title(0, 0, &dnav_text_white, 0, quest_gui_info->page_quests[quest_gui_info->cursor_i]->quest_name_ptr);
                 update_cursor_position();
             }
             break;

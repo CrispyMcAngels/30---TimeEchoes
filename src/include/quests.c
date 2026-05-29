@@ -3,7 +3,9 @@
 
 #include "quests.h"
 
+#if !USE_C_QUESTS
 struct QuestTableEntry * const quest_list = (struct QuestTableEntry * const)QUEST_TABLE_START;
 u8 no_info[] =    {0xAE, 0xAE, 0xAE, 0xAE, 0xAE, 0xAE, 0xFE, 0xFF};
+#endif
 
 #endif

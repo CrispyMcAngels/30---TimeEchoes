@@ -5,17 +5,14 @@
 #include "gui.h"
 #include "../config.h"
 
-//sizeof: 0x10
+// Terminator entry: quest_name_ptr == NULL
 struct QuestTableEntry{
-	/*OFF: 0x0 */ u8  oam_id;
-	/*OFF: 0x1 */ void *quest_name_ptr;
-	/*OFF: 0x5 */ void *quest_desc_ptr;
-	
-	/*OFF: 0x9 */ u16 flag_is_available;
-	/*OFF: 0xB */ u16 flag_is_completed;
-	
-	/*OFF: 0xD */ u8  filler1; //for the table to be 2-aligned
-	/*OFF: 0xE */ u16 filler2; //for the table to be 0x10-aligned (optional)
+	void *tile_ptr;       // compressed sprite tile data (NULL = no sprite)
+	void *pal_ptr;        // sprite palette data (NULL = no sprite)
+	void *quest_name_ptr;
+	void *quest_desc_ptr;
+	u16 flag_is_available;
+	u16 flag_is_completed;
 };
 
 
