@@ -179,10 +179,24 @@ void quest_gui_handler(){
                         super.multi_purpose_state_tracker = 0;
                         return;
                     case KEY_A: {
-                        struct QuestTableEntry *selected = quest_gui_info->page_quests[quest_gui_info->cursor_i];
-                        if (selected != &empty_quest) {
-                            u16 quest_id = (u16)(selected - quest_list) + 1;
-                            var_set(0x4067, quest_id);
+                        if (quest_gui_info->mode == QUEST_GUI_ACTIVE) {
+                            struct QuestTableEntry *selected = quest_gui_info->page_quests[quest_gui_info->cursor_i];
+                            if (selected != &empty_quest) {
+                                if (check_flag(0x11)) {
+                                    u16 quest_id = (u16)(selected - quest_list) + 1;
+                                    var_set(0x4067, quest_id);
+                                } else {
+                                    // "Errore, devi avvicinarti alla statua"
+                                    static const u8 err_msg[] = {
+                                        0xBF, 0xE6, 0xE6, 0xE3, 0xE6, 0xD9, 0xB8, 0x00, 0xD8, 0xD9, 0xEA, 0xDD, 0x00,
+                                        0xD5, 0xEA, 0xEA, 0xDD, 0xD7, 0xDD, 0xE2, 0xD5, 0xE6, 0xE8, 0xDD, 0x00,
+                                        0xD5, 0xE0, 0xE0, 0xD5, 0x00, 0xE7, 0xE8, 0xD5, 0xE8, 0xE9, 0xD5, 0xFF
+                                    };
+                                    write_to_quest_desc(0, &dnav_text_red, 0, err_msg);
+                                    super.multi_purpose_state_tracker = 6;
+                                    return;
+                                }
+                            }
                         }
                         break;
                     }
@@ -199,8 +213,18 @@ void quest_gui_handler(){
                 update_cursor_position();
             }
             break;
-			
+		case 6: // Hold error message until A or B is pressed
+			if (!pal_fade_control.active) {
+				switch (super.buttons_new_remapped & (KEY_A | KEY_B)) {
+					case KEY_A:
+					case KEY_B:
+						write_to_quest_desc(0, &dnav_text_black, 0, quest_gui_info->page_quests[quest_gui_info->cursor_i]->quest_desc_ptr);
+						super.multi_purpose_state_tracker = 5;
+						break;
+				}
+			}
+			break;
 	}
-	
-	
+
+
 }

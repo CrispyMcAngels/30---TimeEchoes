@@ -2,15 +2,7 @@
 .thumb
 .open "./BPRE0.gba","./multi.gba", 0x08000000
 
-.org 0x806F282
-.thumb
-.align 2
-LDR r0, =input_handler|1
-BX r0
-.pool
-
-
-.org 0x08810000
+.org 0x0883F6C0
 
 
 
